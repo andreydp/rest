@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: restwebapp
+  name: restwebapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: restwebapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: restwebapp
+    spec:
+      containers:
+      - image: restwebapp
+        name: restwebapp
+        ports:
+        - containerPort: 8080
+        resources: {}
+        imagePullPolicy: Never

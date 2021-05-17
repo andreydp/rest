@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: webservice
+spec:
+  selector:
+    app: webaservice
+  ports:
+  - protocol: "TCP"
+    # Port accessible inside cluster
+    port: 80
+    # Port to forward to inside the pod
+    targetPort: 8080
+    # Port accessible outside cluster
+    nodePort: 30002
+  type: LoadBalancer
+  externalIPs:
+  - 192.168.1.51
