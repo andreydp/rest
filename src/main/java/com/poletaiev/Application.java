@@ -5,8 +5,10 @@ package com.poletaiev;
  */
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
+@EntityScan("com.poletaiev.*")
 public class Application {
 
     public static void main(String[] args) {

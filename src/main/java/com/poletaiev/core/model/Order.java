@@ -1,19 +1,28 @@
 package com.poletaiev.core.model;
 
 import com.google.gson.annotations.SerializedName;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Entity;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.data.annotation.Id;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
 import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Data
+@javax.persistence.Entity
+@Table(name = "ORDERS")
 public class Order {
     @SerializedName("order_number")
+    @javax.persistence.Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @SerializedName("order_amount")
     private Double amount;

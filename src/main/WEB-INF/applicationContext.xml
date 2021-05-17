@@ -8,7 +8,7 @@
 
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.poletaiev.web"/>
+    <context:component-scan base-package="com.poletaiev"/>
 
     <bean id="orderService" class="com.poletaiev.service.impl.OrderServiceImpl">
         <property name="orderDao" ref="orderDao"/>

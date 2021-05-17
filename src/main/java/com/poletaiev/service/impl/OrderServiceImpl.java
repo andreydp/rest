@@ -6,8 +6,13 @@ import com.google.gson.JsonPrimitive;
 import com.google.gson.JsonSerializer;
 import com.poletaiev.Constants;
 import com.poletaiev.core.model.Order;
+import com.poletaiev.core.model.OrderRepository;
 import com.poletaiev.dao.OrderDao;
 import com.poletaiev.service.OrderService;
+import jdk.nashorn.internal.objects.annotations.Constructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +22,21 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
 
     private final Gson JSON;
+    private  OrderRepository orderRepository;
+    private OrderDao orderDao;
+
 
     {
         GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting().setDateFormat(Constants.ORDER_DATE_FORMAT_STRING);
         gsonBuilder.registerTypeAdapter(Double.class, (JsonSerializer<Double>) (src, typeOfSrc, context) ->
-                new JsonPrimitive(Double.parseDouble(Constants.ORDER_AMOUNT_FORMAT.format(src))));
+                new JsonPrimitive(Double.parseDouble(String.valueOf(src))));
         JSON = gsonBuilder.create();
     }
 
-    private OrderDao orderDao;
+    @Autowired
+    public void setOrderRepository(final OrderRepository orderRepository) {
+        this.orderRepository = orderRepository;
+    }
 
     @Autowired
     public void setOrderDao(final OrderDao orderDao) {
