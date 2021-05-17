@@ -6,8 +6,8 @@ import org.springframework.context.annotation.ImportResource;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
-@ImportResource("WEB-INF/applicationContext.xml")
-@ComponentScan(basePackages = "com.poletaiev")
+@ImportResource("applicationContext.xml")
+//@ComponentScan(basePackages = "com.poletaiev")
 public class AppConfig  extends WebMvcConfigurerAdapter {
 
 }
