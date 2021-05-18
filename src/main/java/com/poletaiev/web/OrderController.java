@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/details")
+@RequestMapping("api/order")
 public final class OrderController {
 
     private final OrderService orderService;
@@ -50,7 +50,7 @@ public final class OrderController {
         return orderService.toJson(order);
     }
 
-    @PostMapping("/orders")
+    @PostMapping("/postOrder")
     public void postOrder(@RequestBody OrderDto orderDto) {
         Order order = new Order();
         order.setAgent(orderDto.getAgent());

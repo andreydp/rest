@@ -22,7 +22,6 @@ import java.util.*;
 public class OrderServiceImpl implements OrderService {
 
     private final Gson JSON;
-    private  OrderRepository orderRepository;
     private OrderDao orderDao;
 
 
@@ -35,7 +34,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     public void setOrderRepository(final OrderRepository orderRepository) {
-        this.orderRepository = orderRepository;
     }
 
     @Autowired

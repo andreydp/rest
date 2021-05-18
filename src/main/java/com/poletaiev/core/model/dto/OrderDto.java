@@ -1,5 +1,6 @@
 package com.poletaiev.core.model.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
 import java.util.Date;
@@ -8,7 +9,6 @@ import java.util.Date;
  * Created by andrey on 18.05.2021.
  */
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -16,6 +16,7 @@ import java.util.Date;
 @Data
 public class OrderDto {
     private Double amount;
+    @JsonFormat(pattern="yyyy-MM-dd'Z'HH:mm:ss.SSS")
     private Date orderDate;
     private String customer;
     private String agent;
@@ -24,7 +25,7 @@ public class OrderDto {
     @Override
     public String toString() {
         return "OrderDto{" +
-                ", amount=" + amount +
+                "amount=" + amount +
                 ", orderDate=" + orderDate +
                 ", customer='" + customer + '\'' +
                 ", agent='" + agent + '\'' +
