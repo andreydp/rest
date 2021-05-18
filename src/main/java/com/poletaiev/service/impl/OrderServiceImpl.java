@@ -1,9 +1,6 @@
 package com.poletaiev.service.impl;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonPrimitive;
-import com.google.gson.JsonSerializer;
+
 import com.poletaiev.Constants;
 import com.poletaiev.core.model.Order;
 import com.poletaiev.core.model.OrderRepository;
@@ -21,16 +18,7 @@ import java.util.*;
 @Service("orderService")
 public class OrderServiceImpl implements OrderService {
 
-    private final Gson JSON;
     private OrderDao orderDao;
-
-
-    {
-        GsonBuilder gsonBuilder = new GsonBuilder().setPrettyPrinting().setDateFormat(Constants.ORDER_DATE_FORMAT_STRING);
-        gsonBuilder.registerTypeAdapter(Double.class, (JsonSerializer<Double>) (src, typeOfSrc, context) ->
-                new JsonPrimitive(Double.parseDouble(String.valueOf(src))));
-        JSON = gsonBuilder.create();
-    }
 
     @Autowired
     public void setOrderRepository(final OrderRepository orderRepository) {
@@ -52,8 +40,8 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void deleteOrder(Order order) {
-        orderDao.deleteOrder(order);
+    public void deleteOrder(long orderId) {
+        orderDao.deleteOrder(orderId);
     }
 
     @Override
@@ -66,13 +54,13 @@ public class OrderServiceImpl implements OrderService {
         return orderDao.getOrderById(orderId);
     }
 
-    @Override
-    public String getOrderByIdAsJson(long orderId) {
-        return JSON.toJson(getOrderById(orderId));
-    }
-
-    @Override
-    public String toJson(Order order) {
-        return JSON.toJson(order);
-    }
+//    @Override
+//    public String getOrderByIdAsJson(long orderId) {
+//        return JSON.toJson(getOrderById(orderId));
+//    }
+//
+//    @Override
+//    public String toJson(Order order) {
+//        return JSON.toJson(order);
+//    }
 }

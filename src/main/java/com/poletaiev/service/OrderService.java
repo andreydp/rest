@@ -13,9 +13,9 @@ public interface OrderService {
 
     void updateOrder(Order order);
 
-    void deleteOrder(Order order);
+    void deleteOrder(long orderId);
 
-    String getOrderByIdAsJson(long orderId);
+//    String getOrderByIdAsJson(long orderId);
 
-    String toJson(Order order);
+//    String toJson(Order order);
 }

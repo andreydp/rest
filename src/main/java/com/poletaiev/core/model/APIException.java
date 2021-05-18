@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class APIError {
+public class APIException extends RuntimeException{
     int errorCode;
     String description;
 

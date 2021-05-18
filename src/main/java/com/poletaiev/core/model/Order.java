@@ -2,6 +2,7 @@ package com.poletaiev.core.model;
 
 import com.google.gson.annotations.SerializedName;
 import lombok.*;
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -16,6 +17,7 @@ import java.util.Date;
 @Data
 @javax.persistence.Entity
 @Table(name = "ORDERS")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Order {
     @SerializedName("order_number")
     @javax.persistence.Id

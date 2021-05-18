@@ -1,22 +1,27 @@
 package com.poletaiev.dao.impl;
 
+import com.poletaiev.core.model.APIException;
 import com.poletaiev.core.model.Order;
-import com.poletaiev.core.model.mappers.OrderMapper;
+import com.poletaiev.core.model.OrderRepository;
 import com.poletaiev.dao.OrderDao;
-import org.apache.log4j.Logger;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 import java.util.List;
 
-public class OrderDaoJdbcImpl implements OrderDao {
-    private JdbcTemplate jdbcTemplate;
-    private static final Logger orderDaoLogger = Logger.getLogger(OrderDaoJdbcImpl.class);
+import static com.poletaiev.Constants.ERR_CODE_ORDER_NOT_FOUND;
 
+public class OrderDaoJdbcImpl implements OrderDao {
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @Autowired
+    public void setOrderRepository(final OrderRepository orderRepository) {
+    }
+
+    @Autowired
     @Override
     public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override
@@ -31,22 +36,16 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Order getOrderById(long orderId) {
-        String SQL = "EXEC getOrderById @id = ?";
-        try {
-            return (Order) jdbcTemplate.queryForObject(SQL, new Object[]{orderId}, new OrderMapper());
-        } catch (EmptyResultDataAccessException e) {
-            orderDaoLogger.warn("Empty result returned for orderId='" + orderId + "'");
-            return null;
-        }
+        return orderRepository.findById(orderId).orElseThrow(() -> new APIException(ERR_CODE_ORDER_NOT_FOUND, "Order with id='" + orderId + "' not found"));
     }
 
     @Override
     public List<Order> getAllOrders() {
-        throw new UnsupportedOperationException();
+        return orderRepository.findAll();
     }
 
     @Override
-    public void deleteOrder(Order order) {
-        throw new UnsupportedOperationException();
+    public void deleteOrder(long orderId) {
+        orderRepository.deleteById(orderId);
     }
 }

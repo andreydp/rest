@@ -15,7 +15,7 @@ public interface OrderDao {
 
     List<Order> getAllOrders();
 
-    void deleteOrder(Order order);
+    void deleteOrder(long orderId);
 
     void setDataSource(DataSource dataSource);
 }
