@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.ws.rs.Produces;
 import java.util.List;
 
+import static com.poletaiev.Constants.ERR_CODE_INVALID_ORDER_ID_FORMAT;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/order")
@@ -33,14 +35,18 @@ public final class OrderController {
      */
     public Object getOrder(@PathVariable("id") String id) {
         long orderId;
-        Order order;
-            orderId = Long.parseLong(id);
+        Order order = null;
             try {
+                orderId = Long.parseLong(id);
                 order = orderService.getOrderById(orderId);
             }
             catch (APIException ex)
             {
                 return ex.toString();
+            }
+            catch (NumberFormatException ex)
+            {
+                return new APIException(ERR_CODE_INVALID_ORDER_ID_FORMAT, "orderId '" + id + "' is not numeric").toString();
             }
         return order == null ? "" : order;
     }
