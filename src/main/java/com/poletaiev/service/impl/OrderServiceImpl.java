@@ -1,15 +1,9 @@
 package com.poletaiev.service.impl;
 
-
-import com.poletaiev.Constants;
 import com.poletaiev.core.model.Order;
 import com.poletaiev.core.model.OrderRepository;
 import com.poletaiev.dao.OrderDao;
 import com.poletaiev.service.OrderService;
-import jdk.nashorn.internal.objects.annotations.Constructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
